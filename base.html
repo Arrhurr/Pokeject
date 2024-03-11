@@ -17,7 +17,6 @@
 <script src="JSON/pokemon.js"></script>
 <script src="JSON/type_effectiveness.js"></script>
 <script>
-
 class Pokemon{
     static all_pokemons = []
     constructor(id,nom,form,attaque,defense,endurance){
@@ -28,7 +27,7 @@ class Pokemon{
         this._defense =defense;
         this._endurance = endurance;
     }    
-    toString(){console.log(this._id);console.log(this._nom);console.log(this._form);console.log(this._attaque);console.log(this._defense);console.log(this._endurance);console.log(this._type);};
+    toString(){document.write(this._id);document.write(this._nom);document.write(this._form);document.write(this._attaque);document.write(this._defense);document.write(this._endurance);document.write(this._type);};
     get id(){return this._id;};
     get nom(){return this._nom;};
     get form(){return this._form;};
@@ -45,11 +44,11 @@ function import_pokemon(){
     for(var i=0;i<pokemons.length;i++){
         if(pokemon[i]["form"]=="Normal"){
             all_pokemons.push(new Pokemon(pokemons[i]["pokemon_id"],pokemons[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"]));
-            console.log("passé");
+
         }
 }
 import_pokemon();
-console.log("fini");
+document.write("fini");
 for(var i=0;i<all_pokemons.length;i++){
     Pokemon.pokemonById[i].toString();
 }
