@@ -8,4 +8,52 @@
 <body>
     
 </body>
+<script src="JSON/charged_moves.js"></script>
+<script src="JSON/cp_multiplier.js"></script>
+<script src="JSON/fast_moves.js"></script>
+<script src="JSON/generation.js"></script>
+<script src="JSON/pokemon_moves.js"></script>
+<script src="JSON/pokemon_type.js"></script>
+<script src="JSON/pokemon.js"></script>
+<script src="JSON/type_effectiveness.js"></script>
+<script>
+
+class Pokemon{
+    static all_pokemons = []
+    constructor(id,nom,form,attaque,defense,endurance){
+        this._id = id;
+        this._nom = nom;
+        this._form = form;
+        this._attaque =attaque;
+        this._defense =defense;
+        this._endurance = endurance;
+    }    
+    toString(){console.log(this._id);console.log(this._nom);console.log(this._form);console.log(this._attaque);console.log(this._defense);console.log(this._endurance);console.log(this._type);};
+    get id(){return this._id;};
+    get nom(){return this._nom;};
+    get form(){return this._form;};
+    get defense(){return this._defense;};
+    get type(){return this._type;};
+    get attaque(){return this._attaque;};
+    pokemonById(id){for(var i=0;i<this.all_pokemons.length;i++){
+        if(this.all_pokemons[i].id==id){return this.all_pokemons[i];}}
+    }
+
+}
+
+function import_pokemon(){
+    for(var i=0;i<pokemons.length;i++){
+        if(pokemon[i]["form"]=="Normal"){
+            all_pokemons.push(new Pokemon(pokemons[i]["pokemon_id"],pokemons[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"]));
+            console.log("passé");
+        }
+}
+import_pokemon();
+console.log("fini");
+for(var i=0;i<all_pokemons.length;i++){
+    Pokemon.pokemonById[i].toString();
+}
+}
+</script>
+
 </html>
