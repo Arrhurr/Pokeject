@@ -68,36 +68,17 @@ class Type{
     }
 }
 
-function import_type(){
-    for(var i=0;i<pokemon_type.length;i++){
-        for(var j=1;j<pokemon_type.length;j++){
-            if(pokemon_type[i]["form"]=="Normal" && pokemon_type[i]["type"]!=pokemon_type[j]["type"]){
-                all_types.push(new Type(pokemon_type[i]["type"]));
-            }
-
-    }
-    return all_types;
-}
 
 class Attack{
     static all_attacks = [];
     constructor(move){
         this._move;
     }
+    toString(){}
 }
-
-//function import_attack(){
     //for(var i=0;i<pokemon_moves.length;i++){
         //if(pokemon_moves["charged_moves"][i] == charged_moves["name"]){
             //all_attacks.push(new Attack(charged_moves["move_id"]));
-        //}
-        //else{
-
-        //}
-            
-    //}
-    //return all_attacks;
-//}
 
 import_pokemon();
 document.write("fini");
