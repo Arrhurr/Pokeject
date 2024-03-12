@@ -6,7 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    
 </body>
 <script src="JSON/charged_moves.js"></script>
 <script src="JSON/cp_multiplier.js"></script>
@@ -17,7 +16,7 @@
 <script src="JSON/pokemon.js"></script>
 <script src="JSON/type_effectiveness.js"></script>
 <script>
-class Pokemon{
+class Pokemon{//à completer avec type
     static all_pokemons = []
     constructor(id,nom,form,attaque,defense,endurance){
         this._id = id;
@@ -38,20 +37,76 @@ class Pokemon{
         if(this.all_pokemons[i].id==id){return this.all_pokemons[i];}}
     }
 
+    getTypes(){
+        return import_type();
+    }
+
+    getAttacks(){
+        return import_attack();
+    }
+
 }
 
 function import_pokemon(){
-    for(var i=0;i<pokemons.length;i++){
+    for(var i=0;i<pokemon.length;i++){
         if(pokemon[i]["form"]=="Normal"){
             all_pokemons.push(new Pokemon(pokemons[i]["pokemon_id"],pokemons[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"]));
 
         }
+    }
 }
+
+class Type{
+    constructor(type){
+        this._type = type;
+    }
+    toString(){document.write(this._type);};
+    get type(){return this._type;};
+
+    efficacite(typeAtt, typeDef){
+        pokemon_effectiveness[typeAtt][typeDef];//retourne le pourcentage de dégât dû au type
+    }
+}
+
+function import_type(){
+    for(var i=0;i<pokemon_type.length;i++){
+        for(var j=1;j<pokemon_type.length;j++){
+            if(pokemon_type[i]["form"]=="Normal" && pokemon_type[i]["type"]!=pokemon_type[j]["type"]){
+                all_types.push(new Type(pokemon_type[i]["type"]));
+            }
+
+    }
+    return all_types;
+}
+
+class Attack{
+    static all_attacks = [];
+    constructor(move){
+        this._move;
+    }
+}
+
+//function import_attack(){
+    //for(var i=0;i<pokemon_moves.length;i++){
+        //if(pokemon_moves["charged_moves"][i] == charged_moves["name"]){
+            //all_attacks.push(new Attack(charged_moves["move_id"]));
+        //}
+        //else{
+
+        //}
+            
+    //}
+    //return all_attacks;
+//}
+
 import_pokemon();
 document.write("fini");
 for(var i=0;i<all_pokemons.length;i++){
     Pokemon.pokemonById[i].toString();
 }
+
+import_type();
+console.log(new Type("feu").this._type);
 }
 </script>
 
