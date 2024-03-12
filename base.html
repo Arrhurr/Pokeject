@@ -26,14 +26,14 @@ class Pokemon{//à completer avec type
         this._defense =defense;
         this._endurance = endurance;
     }    
-    toString(){console.log(this._id);console.log(this._nom);console.log(this._form);console.log(this._attaque);console.log(this._defense);console.log(this._endurance);console.log(this._type);};
+    toString(){document.write(this._id);document.write(this._nom);document.write(this._form);document.write(this._attaque);document.write(this._defense);document.write(this._endurance);document.write(this._type);};
     get id(){return this._id;};
     get nom(){return this._nom;};
     get form(){return this._form;};
     get defense(){return this._defense;};
     get type(){return this._type;};
     get attaque(){return this._attaque;};
-    static pokemonById(id){for(var i=0;i<this.all_pokemons.length;i++){
+    pokemonById(id){for(var i=0;i<this.all_pokemons.length;i++){
         if(this.all_pokemons[i].id==id){return this.all_pokemons[i];}}
     }
 
@@ -50,15 +50,63 @@ class Pokemon{//à completer avec type
 function import_pokemon(){
     for(var i=0;i<pokemon.length;i++){
         if(pokemon[i]["form"]=="Normal"){
-            Pokemon.all_pokemons.push(new Pokemon(pokemon[i]["pokemon_id"],pokemon[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"]));
+            all_pokemons.push(new Pokemon(pokemons[i]["pokemon_id"],pokemons[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"]));
 
         }
+    }
 }
+
+class Type{
+    constructor(type){
+        this._type = type;
+    }
+    toString(){document.write(this._type);};
+    get type(){return this._type;};
+
+    efficacite(typeAtt, typeDef){
+        pokemon_effectiveness[typeAtt][typeDef];//retourne le pourcentage de dégât dû au type
+    }
+}
+
+function import_type(){
+    for(var i=0;i<pokemon_type.length;i++){
+        for(var j=1;j<pokemon_type.length;j++){
+            if(pokemon_type[i]["form"]=="Normal" && pokemon_type[i]["type"]!=pokemon_type[j]["type"]){
+                all_types.push(new Type(pokemon_type[i]["type"]));
+            }
+
+    }
+    return all_types;
+}
+
+class Attack{
+    static all_attacks = [];
+    constructor(move){
+        this._move;
+    }
+}
+
+//function import_attack(){
+    //for(var i=0;i<pokemon_moves.length;i++){
+        //if(pokemon_moves["charged_moves"][i] == charged_moves["name"]){
+            //all_attacks.push(new Attack(charged_moves["move_id"]));
+        //}
+        //else{
+
+        //}
+            
+    //}
+    //return all_attacks;
+//}
+
 import_pokemon();
 document.write("fini");
 for(var i=0;i<all_pokemons.length;i++){
     Pokemon.pokemonById[i].toString();
 }
+
+import_type();
+console.log(new Type("feu").this._type);
 }
 </script>
 
