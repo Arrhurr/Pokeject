@@ -19,76 +19,88 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////:
 class Pokemon{
     static all_pokemons = []
-    constructor(id,nom,form,attaque,defense,endurance){
+    constructor(id,nom,form,attaque,defense,endurance,type){
         this._id = id;
         this._nom = nom;
         this._form = form;
         this._attaque =attaque;
         this._defense =defense;
         this._endurance = endurance;
+        this._type=type;
+////        this._attackability=attackability;
     }    
-    toString(){document.write(this._id);document.write(this._nom);document.write(this._form);document.write(this._attaque);document.write(this._defense);document.write(this._endurance);document.write(this._type);};
+    toString(){console.log(this._id);console.log(this._nom);console.log(this._form);console.log(this._attaque);console.log(this._defense);console.log(this._endurance);console.log(this._type);};
     get id(){return this._id;};
     get nom(){return this._nom;};
     get form(){return this._form;};
     get defense(){return this._defense;};
     get type(){return this._type;};
     get attaque(){return this._attaque;};
-    pokemonById(id){for(var i=0;i<this.all_pokemons.length;i++){
+///    get attackability(){return this._attackability;};
+    static pokemonById(id){for(var i=0;i<this.all_pokemons.length;i++){
         if(this.all_pokemons[i].id==id){return this.all_pokemons[i];}}
     }
-
-    getTypes(){
-        return import_type();
-    }
-
-    getAttacks(){
-        return import_attack();
-    }
-
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////:
 
+
 class Type{
     static all_types=[];
-    
-
-}
-
-
-
-function import_pokemon(){
-    for(var i=0;i<pokemon.length;i++){
-        if(pokemon[i]["form"]=="Normal"){
-            all_pokemons.push(new Pokemon(pokemons[i]["pokemon_id"],pokemons[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"]));
-
-        }//Ajouter le type de l'attaque
-        if(all_attacks.indexOf(pokemon_moves["charged_moves"][i]) == -1){
-            all_attacks.push(new Attack(pokemon_moves["charged_moves"][i],,"charged_moves"));
-        }
-        if(all_attacks.indexOf(pokemon_moves["elite_charged_moves"][i]) == -1){
-            all_attacks.push(new Attack(pokemon_moves["elite_charged_moves"][i],"elite_charged_moves"));
-        }
-        if (all_attacks.indexOf(pokemon_moves["elite_fast_moves"][i]) == -1){
-            all_attacks.push(new Attack(pokemon_moves["elite_fast_moves"][i],"elite_fast_moves"));
-        }
-        if(all_attacks.indexOf(pokemon_moves["fast_moves"][i]) == -1){
-            all_attacks.push(new Attack(pokemon_moves["fast_moves"][i],"fast_moves"));
-        }
-    }
-}
-
-class Type{
     constructor(type){
         this._type = type;
+        this._effect = [];  
     }
-    toString(){document.write(this._type);};
+    toString(){console.log(this._type);console.log(this._effect)};
     get type(){return this._type;};
-
-    efficacite(typeAtt, typeDef){
-        pokemon_effectiveness[typeAtt][typeDef];//retourne le pourcentage de dégât dû au type
+    get effect(){return this._effect};
+    set effect(effect){this._effect.push([effect,type_effectiveness[this._type][effect]]);};
+    
+    
+    static exist(type){
+        let vrai=1;
+        for(var i=0;i<Type.all_types.length;i++){
+            if(Type.all_types[i].type==type){
+                vrai=0;
+            }
+        }
+        return vrai;
+    };
+    static find(type){
+        if(Type.exist(type)==1){
+            return -1;
+        }
+        else{
+            for(var i=0;i<Type.all_types.length;i++){
+                if(Type.all_types[i].type==type){
+                    return i;
+                }
+            }
+        }
     }
 }
+///////////////////////////////////////////////////////////////////////////////
+function import_pokemon(){
+    for(var i=0;i<pokemon.length;i++){
+        var poketype=[]
+        for(var y=0;y<pokemon_type[i]["type"].length;y++){
+                if(Type.exist(pokemon_type[i]["type"][y])==1){
+                    Type.all_types.push(new Type(pokemon_type[i]["type"][y]));
+                    for(var z=0;z<Type.all_types.length;z++){
+                        Type.all_types[z].effect = pokemon_type[i]["type"][y]
+                        if(z!=Type.all_types.length - 1){
+                            Type.all_types[Type.all_types.length-1].effect = Type.all_types[z].type;
+                        }
+                    }
+                }
+                poketype.push(Type.all_types[Type.find(pokemon_type[i]["type"][y])]);
+            }
+            Pokemon.all_pokemons.push(new Pokemon(pokemon[i]["pokemon_id"],pokemon[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"],poketype));
+
+        }
+    }
+
+
+
 
 
 class Attack{
@@ -113,13 +125,9 @@ class Attack{
         //all_attacks.push(new Attack(charged_moves["move_id"]));
 
 import_pokemon();
-document.write("fini");
-for(var i=0;i<all_pokemons.length;i++){
-    Pokemon.pokemonById[i].toString();
-}
-
-import_type();
-console.log(new Type("feu").this._type);
+console.log(Type.all_types.length);
+console.log(Type.all_types);
+console.log(Pokemon.pokemonById(5).toString());
 
 </script>
 
