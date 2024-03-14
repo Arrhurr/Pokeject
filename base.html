@@ -41,9 +41,6 @@ class Pokemon{
         if(this.all_pokemons[i].id==id){return this.all_pokemons[i];}}
     }
 
-    getAttacks(){
-        
-    }
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////:
 
@@ -86,13 +83,13 @@ class Type{
 class Attack{
     static all_attacks = [];
     constructor(att_name){
-        this._att_name;       //nom de l'attaque
+        this._att_name = att_name;       //nom de l'attaque
         this._type_move;  //type de l'attaque
         this._genre_move; //attaque chargées ou rapide
         
     }
     
-    toString(){console.log(this._name, this._type_move, this._genre_move)};
+    toString(){console.log(this._att_name, this._type_move, this._genre_move)};
 
     get att_name(){return this._att_name};
     get type_move(){return this._type_move};
@@ -139,33 +136,47 @@ function import_pokemon(){
                 }
                 poketype.push(Type.all_types[Type.find(pokemon_type[i]["type"][y])]);
         }
-        for(var b=0;b<pokemon_moves[i]["charged_moves"].length;b++)
-                for(var a=0;a<charged_moves.length;a++){
-                    if(charged_moves[a]["name"]==pokemon_moves[i]["charged_moves"][b]){
-                        if(Attack.exist(pokemon_moves[i]["charged_moves"][b])==1){
-                            Attack.all_attacks.push(new Attack(pokemon_moves[i]["charged_moves"][b]))
+        var feur=0
+        for(key in pokemon_moves[i]){
+            if(feur<4){
+                for(var b=0;b<pokemon_moves[i][key].length;b++){
+                    for(var a=0;a<charged_moves.length;a++){
+                        if(feur==0 || feur==1){
+                            if(charged_moves[a]["name"]==pokemon_moves[i][key][b]){
+                                if(Attack.exist(pokemon_moves[i][key][b])==1){
+                                    Attack.all_attacks.push(new Attack(pokemon_moves[i][key][b]));
+                                }
+                            }   
                         }
                     }
+                    for(var a=0;a<fast_moves.length;a++){    
+                        if(feur==2 || feur==3){
+                            if(fast_moves[a]["name"]==pokemon_moves[i][key][b]){
+                                if(Attack.exist(pokemon_moves[i][key][b])==1){
+                                    Attack.all_attacks.push(new Attack(pokemon_moves[i][key][b]));
+                                }
+                            }
+                        }
+                        
+                    }pokeattack.push(Attack.all_attacks[Attack.find(pokemon_moves[i][key][b])]);
                 }
-                
+            }
+        feur++;
+        }
+         
               
         
-            
-    Pokemon.all_pokemons.push(new Pokemon(pokemon[i]["pokemon_id"],pokemon[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"],poketype));
+        
+    Pokemon.all_pokemons.push(new Pokemon(pokemon[i]["pokemon_id"],pokemon[i]["pokemon_name"],pokemon[i]["form"],pokeattack,pokemon[i]["base_defense"],pokemon[i]["base_stamina"],poketype));
              
     }
 }
 
 
-//for(var i=0;i<pokemon_moves.length;i++){
-    //if(pokemon_moves["charged_moves"][i] == charged_moves["name"]){
-        //all_attacks.push(new Attack(charged_moves["move_id"]));
 
 import_pokemon();
-console.log(Type.all_types.length);
-console.log(Type.all_types);
-console.log(Pokemon.pokemonById(5).toString());
-console.log(Attack.all_attacks);
+
+console.log(Pokemon.pokemonById(5).attaque);
 </script>
 
 </html>
