@@ -51,9 +51,10 @@ class Pokemon{
 
 class Type{
     static all_types=[];
-    constructor(type)
+    
 
 }
+
 
 
 function import_pokemon(){
@@ -61,6 +62,18 @@ function import_pokemon(){
         if(pokemon[i]["form"]=="Normal"){
             all_pokemons.push(new Pokemon(pokemons[i]["pokemon_id"],pokemons[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"]));
 
+        }//Ajouter le type de l'attaque
+        if(all_attacks.indexOf(pokemon_moves["charged_moves"][i]) == -1){
+            all_attacks.push(new Attack(pokemon_moves["charged_moves"][i],,"charged_moves"));
+        }
+        if(all_attacks.indexOf(pokemon_moves["elite_charged_moves"][i]) == -1){
+            all_attacks.push(new Attack(pokemon_moves["elite_charged_moves"][i],"elite_charged_moves"));
+        }
+        if (all_attacks.indexOf(pokemon_moves["elite_fast_moves"][i]) == -1){
+            all_attacks.push(new Attack(pokemon_moves["elite_fast_moves"][i],"elite_fast_moves"));
+        }
+        if(all_attacks.indexOf(pokemon_moves["fast_moves"][i]) == -1){
+            all_attacks.push(new Attack(pokemon_moves["fast_moves"][i],"fast_moves"));
         }
     }
 }
@@ -80,14 +93,24 @@ class Type{
 
 class Attack{
     static all_attacks = [];
-    constructor(move){
-        this._move;
+    constructor(name, type_move, genre_move){
+        this._name;       //nom de l'attaque
+        this._type_move;  //type de l'attaque
+        this._genre_move; //attaque chargées ou rapide
+        
     }
-    toString(){}
+    
+    toString(){console.log(this._name, this._type_move)};
+
+    get name(){return this._name};
+    get type_move(){return this._type_move};
+    get genre_move(){return this._genre_move};
+    
+
 }
-    //for(var i=0;i<pokemon_moves.length;i++){
-        //if(pokemon_moves["charged_moves"][i] == charged_moves["name"]){
-            //all_attacks.push(new Attack(charged_moves["move_id"]));
+//for(var i=0;i<pokemon_moves.length;i++){
+    //if(pokemon_moves["charged_moves"][i] == charged_moves["name"]){
+        //all_attacks.push(new Attack(charged_moves["move_id"]));
 
 import_pokemon();
 document.write("fini");
@@ -97,7 +120,7 @@ for(var i=0;i<all_pokemons.length;i++){
 
 import_type();
 console.log(new Type("feu").this._type);
-}
+
 </script>
 
 </html>
