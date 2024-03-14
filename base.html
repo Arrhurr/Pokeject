@@ -37,7 +37,7 @@ class Pokemon{
     get type(){return this._type;};
     get attaque(){return this._attaque;};
 ///    get attackability(){return this._attackability;};
-    pokemonById(id){for(var i=0;i<this.all_pokemons.length;i++){
+    static pokemonById(id){for(var i=0;i<this.all_pokemons.length;i++){
         if(this.all_pokemons[i].id==id){return this.all_pokemons[i];}}
     }
 }
@@ -70,8 +70,8 @@ class Type{
             return -1;
         }
         else{
-            for(var i=0;i<all_types.length;i++){
-                if(Type.all_types[i].type()==type){
+            for(var i=0;i<Type.all_types.length;i++){
+                if(Type.all_types[i].type==type){
                     return i;
                 }
             }
@@ -81,20 +81,19 @@ class Type{
 ///////////////////////////////////////////////////////////////////////////////
 function import_pokemon(){
     for(var i=0;i<pokemon.length;i++){
+        var poketype=[];
         if(pokemon[i]["form"]=="Normal"){
-            var poketype=[];
             for(var y=0;y<pokemon_type[i]["type"].length;y++){
                 if(Type.exist(pokemon_type[i]["type"][y])==1){
                     Type.all_types.push(new Type(pokemon_type[i]["type"][y]));
-                    poketype.push(Type.all_types.length - 1);
                     for(var z=0;z<Type.all_types.length;z++){
                         Type.all_types[z].effect = pokemon_type[i]["type"][y]
                         if(z!=Type.all_types.length - 1){
                             Type.all_types[Type.all_types.length-1].effect = Type.all_types[z].type;
                         }
                     }
-
                 }
+                poketype.push(Type.all_types[Type.find(pokemon_type[i]["type"][y])]);
             }
             Pokemon.all_pokemons.push(new Pokemon(pokemon[i]["pokemon_id"],pokemon[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"],poketype));
 
@@ -106,7 +105,7 @@ function import_pokemon(){
 import_pokemon();
 console.log(Type.all_types.length);
 console.log(Type.all_types);
-console.log(pokemonById(5).type.effect);
+console.log(Pokemon.pokemonById(5).toString());
 
 </script>
 
