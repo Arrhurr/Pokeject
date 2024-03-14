@@ -81,6 +81,7 @@ class Type{
 ///////////////////////////////////////////////////////////////////////////////
 function import_pokemon(){
     for(var i=0;i<pokemon.length;i++){
+        var poketype=[]
         for(var y=0;y<pokemon_type[i]["type"].length;y++){
                 if(Type.exist(pokemon_type[i]["type"][y])==1){
                     Type.all_types.push(new Type(pokemon_type[i]["type"][y]));
@@ -99,17 +100,7 @@ function import_pokemon(){
     }
 
 
-class Type{
-    constructor(type){
-        this._type = type;
-    }
-    toString(){document.write(this._type);};
-    get type(){return this._type;};
 
-    efficacite(typeAtt, typeDef){
-        pokemon_effectiveness[typeAtt][typeDef];//retourne le pourcentage de dégât dû au type
-    }
-}
 
 
 class Attack{
