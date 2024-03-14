@@ -83,24 +83,35 @@ function import_pokemon(){
     for(var i=0;i<pokemon.length;i++){
         var poketype=[];
         if(pokemon[i]["form"]=="Normal"){
-            for(var y=0;y<pokemon_type[i]["type"].length;y++){
-                if(Type.exist(pokemon_type[i]["type"][y])==1){
-                    Type.all_types.push(new Type(pokemon_type[i]["type"][y]));
-                    for(var z=0;z<Type.all_types.length;z++){
-                        Type.all_types[z].effect = pokemon_type[i]["type"][y]
-                        if(z!=Type.all_types.length - 1){
-                            Type.all_types[Type.all_types.length-1].effect = Type.all_types[z].type;
-                        }
-                    }
-                }
-                poketype.push(Type.all_types[Type.find(pokemon_type[i]["type"][y])]);
-            }
-            Pokemon.all_pokemons.push(new Pokemon(pokemon[i]["pokemon_id"],pokemon[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"],poketype));
+            all_pokemons.push(new Pokemon(pokemons[i]["pokemon_id"],pokemons[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"]));
 
         }
     }
 }
 
+class Type{
+    constructor(type){
+        this._type = type;
+    }
+    toString(){document.write(this._type);};
+    get type(){return this._type;};
+
+    efficacite(typeAtt, typeDef){
+        pokemon_effectiveness[typeAtt][typeDef];//retourne le pourcentage de dégât dû au type
+    }
+}
+
+
+class Attack{
+    static all_attacks = [];
+    constructor(move){
+        this._move;
+    }
+    toString(){}
+}
+    //for(var i=0;i<pokemon_moves.length;i++){
+        //if(pokemon_moves["charged_moves"][i] == charged_moves["name"]){
+            //all_attacks.push(new Attack(charged_moves["move_id"]));
 
 import_pokemon();
 console.log(Type.all_types.length);
