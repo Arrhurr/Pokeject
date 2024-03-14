@@ -81,13 +81,23 @@ class Type{
 ///////////////////////////////////////////////////////////////////////////////
 function import_pokemon(){
     for(var i=0;i<pokemon.length;i++){
-        var poketype=[];
-        if(pokemon[i]["form"]=="Normal"){
-            all_pokemons.push(new Pokemon(pokemons[i]["pokemon_id"],pokemons[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"]));
+        for(var y=0;y<pokemon_type[i]["type"].length;y++){
+                if(Type.exist(pokemon_type[i]["type"][y])==1){
+                    Type.all_types.push(new Type(pokemon_type[i]["type"][y]));
+                    for(var z=0;z<Type.all_types.length;z++){
+                        Type.all_types[z].effect = pokemon_type[i]["type"][y]
+                        if(z!=Type.all_types.length - 1){
+                            Type.all_types[Type.all_types.length-1].effect = Type.all_types[z].type;
+                        }
+                    }
+                }
+                poketype.push(Type.all_types[Type.find(pokemon_type[i]["type"][y])]);
+            }
+            Pokemon.all_pokemons.push(new Pokemon(pokemon[i]["pokemon_id"],pokemon[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"],poketype));
 
         }
     }
-}
+
 
 class Type{
     constructor(type){
