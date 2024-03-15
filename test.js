@@ -36,3 +36,10 @@ function sortPokemonByName(){
     }
     return liste_noms.sort()
 }
+
+function  getWeakestEnemies(attack){
+    var ennemis_faibles= []
+    for(var i=0; i<Type.all_types;i++){
+        
+    }
+}
