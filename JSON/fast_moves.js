@@ -94,7 +94,7 @@ let fast_moves = [
         "duration": 1000,
         "energy_delta": 10,
         "move_id": 209,
-        "name": "Ember",
+        "name": "Ember",    
         "power": 10,
         "stamina_loss_scaler": 0.01,
         "type": "Fire"
