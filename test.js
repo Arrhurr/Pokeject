@@ -32,24 +32,32 @@ function sortPokemonByStamina(){
 function getAttackTypesForEnnemy(name){
     var poke=Pokemon.pokemonByName(name);
     var min=["Bug"];
-    for(var i=0; i<poke.type[0].effect.length; i++){
-        if(poke.type.length==1){
-            if(poke.type[0].effect[poke.type.effect.at(i)]<poke.type[0].effect[min[0]]){
-                min=[]
-                min.push(poke.type.effect.at(i))
+    console.log(poke.type[0].effect)
+    for(key in poke.type[0].effect){
+        if(key!="Bug"){
+            console.log("AAAAA")
+            if(poke.type.length==1){
+                console.log("oui")
+                if(poke.type[0].effect[key]>poke.type[0].effect[min[0]]){
+                    min=[]
+                    min.push(key)
+                }
+                else if(poke.type[0].effect[key]==poke.type[0].effect[min[0]]){
+                    min.push(key)
+                }
+                console.table(poke.type[0].effect)
             }
-            else if(poke.type[0].effect[poke.type.effect.at(i)]==poke.type[0].effect[min[0]]){
-                min.push(poke.type.effect.at(i))
+            else{
+                console.log("non")
+                if(poke.type[0].effect[key] * poke.type[1].effect[key]>poke.type[0].effect[min[0]] * poke.type[1].effect[min[0]]){
+                    min=[]
+                    min.push(key)
+                }
+                else if(poke.type[0].effect[key] * poke.type[1].effect[key]==poke.type[0].effect[min[0]] * poke.type[1].effect[min[0]]){
+                    min.push(key)
+                }
             }
-        }
-        else{
-            if(poke.type[0].effect[poke.type.effect.at(i)] * poke.type[1].effect[poke.type.effect.at(i)]<poke.type[0].effect[min[0]] * poke.type[1].effect[min[0]]){
-                min=[]
-                min.push(poke.type.effect.at(i))
-            }
-            else if(poke.type[0].effect[poke.type.effect.at(i)] * poke.type[1].effect[poke.type.effect.at(i)]==poke.type[0].effect[min[0]] * poke.type[1].effect[min[0]]){
-                min.push(poke.type.effect.at(i))
-            }
+        
         }
     }
     return min;
