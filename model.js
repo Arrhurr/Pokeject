@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////:
 class Pokemon{
     static all_pokemons = []
-    constructor(id,nom,form,attaque,defense,endurance,type){
+    constructor(id,nom,form,attaque,defense,endurance,type,move){
         this._id = id;
         this._nom = nom;
         this._form = form;
@@ -9,6 +9,7 @@ class Pokemon{
         this._defense =defense;
         this._endurance = endurance;
         this._type=type;
+        this._move = move;
 ////        this._attackability=attackability;
     }    //ajouter this._attaque dans le tostring
     toString(){console.log(this._id);console.log(this._nom);console.log(this._form);console.log(this._attaque);console.log(this._defense);console.log(this._endurance);console.log(this._type);};
@@ -18,6 +19,7 @@ class Pokemon{
     get defense(){return this._defense;};
     get type(){return this._type;};
     get attaque(){return this._attaque;};
+    get move(){return this._move;};
 ///    get attackability(){return this._attackability;};
     static pokemonById(id){for(var i=0;i<this.all_pokemons.length;i++){
         if(this.all_pokemons[i].id==id){return this.all_pokemons[i];}}
@@ -29,9 +31,9 @@ class Pokemon{
 
 class Type{
     static all_types=[];
-    constructor(type){
+    constructor(type,effect){
         this._type = type;
-        this._effect = [];  
+        this._effect = effect;  
     }
     toString(){console.log(this._type);console.log(this._effect)};
     get type(){return this._type;};
@@ -110,22 +112,13 @@ class Attack{
 }
 ///////////////////////////////////////////////////////////////////////////////
 function import_pokemon(){
+    for(key in type_effectiveness){
+        Type.all_types.push(new Type(key,type_effectiveness[key]));
+    }
     for(var i=0;i<pokemon.length;i++){
         var poketype=[]
         var pokeattack= []
         if(pokemon[i]["form"]=="Normal"){
-            for(var y=0;y<pokemon_type[i]["type"].length;y++){
-                if(Type.exist(pokemon_type[i]["type"][y])==1){
-                    Type.all_types.push(new Type(pokemon_type[i]["type"][y]));
-                    for(var z=0;z<Type.all_types.length;z++){
-                        Type.all_types[z].effect = pokemon_type[i]["type"][y]
-                        if(z!=Type.all_types.length - 1){
-                            Type.all_types[Type.all_types.length-1].effect = Type.all_types[z].type;
-                        }
-                    }
-                }
-                poketype.push(Type.all_types[Type.find(pokemon_type[i]["type"][y])]);
-            }
             var feur=0
             for(key in pokemon_moves[i]){
                 if(feur<4){
@@ -153,9 +146,13 @@ function import_pokemon(){
             }
             feur++;
             }
-            Pokemon.all_pokemons.push(new Pokemon(pokemon[i]["pokemon_id"],pokemon[i]["pokemon_name"],pokemon[i]["form"],pokeattack,pokemon[i]["base_defense"],pokemon[i]["base_stamina"],poketype));
+            let poketype=[];
+            for(let j=0;j<pokemon_type[i]["type"].length;j++){
+                poketype.push(Type.all_types[Type.find(pokemon_type[i]["type"][j])])
+            }
+            Pokemon.all_pokemons.push(new Pokemon(pokemon[i]["pokemon_id"],pokemon[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"],poketype,pokeattack));
         }
-         
+        
               
         
         
@@ -163,7 +160,5 @@ function import_pokemon(){
              
     }
 }
-
-
 ///////////////////////////////////////////////////////////////
 import_pokemon();

@@ -20,13 +20,23 @@ function getPokemonsByType(typeName){
 function getPokemonsByAttack(attackName){
     var attack_found= [];
         for(var i=0;i<Pokemon.all_pokemons.length;i++){
-            for(var y=0;y<Pokemon.all_pokemons[i].attaque.length;y++){
-                if(Pokemon.all_pokemons[i].attaque[y].att_name==attackName){
+            for(var y=0;y<Pokemon.all_pokemons[i].move.length;y++){
+                if(Pokemon.all_pokemons[i].move[y].att_name==attackName){
                     attack_found.push(Pokemon.all_pokemons[i])
                 }
             }
         }
     return attack_found
+}
+
+function attackByType(typeName){
+    var garde = [];
+    for(var i=0; i<Attack.all_attacks.length; i++){
+        if(Attack.all_attacks[i].type_move.type == typeName){
+            garde.push(Attack.all_attacks[i]);
+        }
+    }
+    return garde;
 }
 
 function sortPokemonByName(){
@@ -37,9 +47,30 @@ function sortPokemonByName(){
     return liste_noms.sort()
 }
 
-function  getWeakestEnemies(attack){
+function getWeakestEnemies(attack){
     var ennemis_faibles= []
-    for(var i=0; i<Type.all_types;i++){
-        
+    var max=0
+    var obj_attack
+    var max_type = []
+    for(var z=0; z<Attack.all_attacks.length;z++){
+        if(attack == Attack.all_attacks[z].att_name){
+            obj_attack=Attack.all_attacks[z]
+        }
     }
+    for(key in obj_attack.type_move.effect){
+        if(max<=obj_attack.type_move.effect[key]){
+            max = obj_attack.type_move.effect[key];
+            max_type.push(max,key);
+        }
+        key++;
+    }
+    for(i in obj_attack.type_move){
+        if(obj_attack.type_move[i]==1.6){
+            console.log(obj_attack.type_move[0])
+        }
+    }
+
+    //ennemis_faibles.push(getPokemonsByType(max_type))
+    
+    return max_type;
 }
