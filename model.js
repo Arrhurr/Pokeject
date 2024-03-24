@@ -1,9 +1,10 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////:
 class Pokemon{
     static all_pokemons = []
-    constructor(id,nom,form,attaque,defense,endurance,type,move){
+    constructor(id,nom,generation,form,attaque,defense,endurance,type,move){
         this._id = id;
         this._nom = nom;
+        this._generation=generation;
         this._form = form;
         this._attaque =attaque;
         this._defense =defense;
@@ -14,6 +15,7 @@ class Pokemon{
     toString(){console.table(this._id);console.table(this._nom);console.table(this._form);console.table(this._attaque);console.table(this._defense);console.table(this._endurance);console.table(this._type);};
     get id(){return this._id;};
     get nom(){return this._nom;};
+    g
     get form(){return this._form;};
     get defense(){return this._defense;};
     get type(){return this._type;};
@@ -113,6 +115,10 @@ class Attack{
 }
 ///////////////////////////////////////////////////////////////////////////////
 function import_pokemon(){
+    const liste_gen=[];
+    for(const [key,values] of Object.entries(generation)){
+        liste_gen.push(values)
+        }
     for(key in type_effectiveness){
         Type.all_types.push(new Type(key,type_effectiveness[key]));
     }
@@ -151,7 +157,15 @@ function import_pokemon(){
             for(let j=0;j<pokemon_type[i]["type"].length;j++){
                 poketype.push(Type.all_types[Type.find(pokemon_type[i]["type"][j])])
             }
-            Pokemon.all_pokemons.push(new Pokemon(pokemon[i]["pokemon_id"],pokemon[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"],poketype,pokeattack));
+            var genZ = 0;
+            for(let g=0;g<liste_gen.length;g++){
+                for(let p=0;p<liste_gen[g].length;p++){
+                    if(liste_gen[g][p]["id"]==pokemon[i]["pokemon_id"]){
+                        genZ=liste_gen[g][p]["generation_number"]
+                    }
+                }
+            }
+            Pokemon.all_pokemons.push(new Pokemon(pokemon[i]["pokemon_id"],pokemon[i]["pokemon_name"],genZ,pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"],poketype,pokeattack));
         }
         
               
@@ -161,6 +175,7 @@ function import_pokemon(){
              
     }
 }
+
 ///////////////////////////////////////////////////////////////
 import_pokemon();
 
