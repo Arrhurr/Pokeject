@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="name">getPokemonsByType (retourne tous les pokemons du type entré):</label><br>
+    <input type="text" id="getPokemonsByType" name="name" required minlength="4" maxlength="30" size="30" />
+    <a onclick="console.table(getPokemonsByType(textbox1.value))">Cliquez ici</a><br>
+
+    <label for="name">getPokemonsByAttack (retourne tous les pokemons de l'attaque entrée):</label><br>
+    <input type="text" id="getPokemonsByAttack" name="name" required minlength="4" maxlength="30" size="30" />
+    <a onclick="console.table(getPokemonsByAttack(textbox2.value))">Cliquez ici</a><br>
+
+    <label for="name">getAttacksByType (retourne toutes les attaques possédant le type entré):</label><br>
+    <input type="text" id="getAttacksByType" name="name" required minlength="4" maxlength="30" size="30" />
+    <a onclick="console.table(getAttacksByType(textbox3.value))">Cliquez ici</a><br>
+
+    <label for="name">sortPokemonByName (retourne tous les pokemons dans l'ordre alphabétique):</label><br>
+    <a onclick="console.table(sortPokemonByName())">Cliquez ici</a><br>
+
+    <label for="name">getWeakestEnemies (retourne toutes les pokemons les plus faibles par rapport à l'attaque entrée):</label><br>
+    <input type="text" id="getWeakestEnemies" name="name" required minlength="4" maxlength="30" size="30" />
+    <a onclick="console.table(getWeakestEnemies(textbox4.value))">Cliquez ici</a><br>
+    
+    <label for="name">sortPokemonByStamina (retourne tous les pokemons dans l'ordre de leur endurance):</label><br>
+    <a onclick="console.table(sortPokemonByStamina())">Cliquez ici</a><br>
+
+    <label for="name"> getAttackTypesForEnnemy (retourne les types d'attaques les plus efficaces contre un ennemi):</label><br>
+    <input type="text" id="getBestAttackTypesForEnnemy" name="name" required minlength="4" maxlength="30" size="30" />
+    <a onclick="console.table( getBestAttackTypesForEnnemy(textbox5.value))">Cliquez ici</a><br>
+
+</body>
+<script src="../data/charged_moves.js"></script>
+<script src="../data/cp_multiplier.js"></script>
+<script src="../data/fast_moves.js"></script>
+<script src="../data/generation.js"></script>
+<script src="../data/pokemon_moves.js"></script>
+<script src="../data/pokemon_type.js"></script>
+<script src="../data/pokemon.js"></script>
+<script src="../data/type_effectiveness.js"></script>
+<script src="../data/class_pokemon.js"></script>
+<script src="../data/class_type.js"></script>
+<script src="../data/class_attack.js"></script>
+<script src="test.js"></script>
+<script>
+    function import_pokemon(){
+    const liste_gen=[];
+    for(const [key,values] of Object.entries(generation)){
+        liste_gen.push(values)
+        }
+    for(key in type_effectiveness){
+        Type.all_types.push(new Type(key,type_effectiveness[key]));
+    }
+    for(var i=0;i<pokemon.length;i++){
+        var poketype=[]
+        var pokeattack= []
+        if(pokemon[i]["form"]=="Normal"){
+            var feur=0
+            for(key in pokemon_moves[i]){
+                if(feur<4){
+                    for(var b=0;b<pokemon_moves[i][key].length;b++){
+                        for(var a=0;a<charged_moves.length;a++){
+                            if(feur==0 || feur==1){
+                                if(charged_moves[a]["name"]==pokemon_moves[i][key][b]){
+                                    if(Attack.exist(pokemon_moves[i][key][b])==1){
+                                        Attack.all_attacks.push(new Attack(pokemon_moves[i][key][b], key,Type.all_types[Type.find(charged_moves[a]["type"])],charged_moves[a]["critical_chance"],charged_moves[a]["duration"],charged_moves[a]["energy_delta"],charged_moves[a]["move_id"],charged_moves[a]["power"],charged_moves[a]["stamina_loss_scaler"]));
+                                    }
+                                }   
+                            }
+                        }
+                        for(var a=0;a<fast_moves.length;a++){    
+                            if(feur==2 || feur==3){
+                                if(fast_moves[a]["name"]==pokemon_moves[i][key][b]){
+                                    if(Attack.exist(pokemon_moves[i][key][b])==1){
+                                        Attack.all_attacks.push(new Attack(pokemon_moves[i][key][b],key,Type.all_types[Type.find(fast_moves[a]["type"])],fast_moves[a]["critical_chance"],fast_moves[a]["duration"],fast_moves[a]["energy_delta"],fast_moves[a]["move_id"],fast_moves[a]["power"],fast_moves[a]["stamina_loss_scaler"]));
+                                    }
+                                }
+                            }
+                        
+                        }pokeattack.push(Attack.all_attacks[Attack.find(pokemon_moves[i][key][b])]);
+                    }
+            }
+            feur++;
+            }
+            let poketype=[];
+            for(let j=0;j<pokemon_type[i]["type"].length;j++){
+                poketype.push(Type.all_types[Type.find(pokemon_type[i]["type"][j])])
+            }
+            var genZ = 0;
+            for(let g=0;g<liste_gen.length;g++){
+                for(let p=0;p<liste_gen[g].length;p++){
+                    if(liste_gen[g][p]["id"]==pokemon[i]["pokemon_id"]){
+                        genZ=liste_gen[g][p]["generation_number"]
+                    }
+                }
+            }
+            Pokemon.all_pokemons.push(new Pokemon(pokemon[i]["pokemon_id"],pokemon[i]["pokemon_name"],genZ,pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"],poketype,pokeattack));
+        }    
+    }
+}
+import_pokemon();
+
+    const textbox1 = document.getElementById('getPokemonsByType');
+    const textbox2 = document.getElementById('getPokemonsByAttack');
+    const textbox3 = document.getElementById('getAttacksByType');
+    const textbox4 = document.getElementById('getWeakestEnemies')
+    const textbox5 = document.getElementById('getBestAttackTypesForEnnemy');
+
+</script>
+</html>
