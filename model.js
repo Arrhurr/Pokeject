@@ -12,7 +12,7 @@ class Pokemon{
         this._move = move;
 ////        this._attackability=attackability;
     }    //ajouter this._attaque dans le tostring
-    toString(){console.log(this._id);console.log(this._nom);console.log(this._form);console.log(this._attaque);console.log(this._defense);console.log(this._endurance);console.log(this._type);};
+    toString(){console.table(this._id);console.table(this._nom);console.table(this._form);console.table(this._attaque);console.table(this._defense);console.table(this._endurance);console.table(this._type);};
     get id(){return this._id;};
     get nom(){return this._nom;};
     get form(){return this._form;};
@@ -35,7 +35,7 @@ class Type{
         this._type = type;
         this._effect = effect;  
     }
-    toString(){console.log(this._type);console.log(this._effect)};
+    toString(){console.table(this._type);console.table(this._effect)};
     get type(){return this._type;};
     get effect(){return this._effect};
     set effect(effect){this._effect.push([effect,type_effectiveness[this._type][effect]]);};
@@ -80,7 +80,7 @@ class Attack{
 
     }
     
-    toString(){console.log(this._att_name, this._type_move, this._genre_move)};
+    toString(){console.table(this._att_name, this._type_move, this._genre_move)};
 
     get att_name(){return this._att_name};
     get type_move(){return this._type_move};
