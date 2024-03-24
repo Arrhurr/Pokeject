@@ -43,10 +43,19 @@ function attackByType(typeName){
 
 function sortPokemonByName(){
     var liste_noms= []
+    var liste_noms2= []
     for(var i=0;i<Pokemon.all_pokemons.length;i++){
         liste_noms.push(Pokemon.all_pokemons[i].nom)
     }
-    return liste_noms.sort()
+    liste_noms = liste_noms.sort();
+    for(var y=0;y<liste_noms.length;y++){
+        for(var u=0;u<Pokemon.all_pokemons.length;u++){
+            if(liste_noms[y] == Pokemon.all_pokemons[u].nom){
+                liste_noms2.push(Pokemon.all_pokemons[u]);
+            }
+        }
+    }    
+    return liste_noms2
 }
 
 function DeuxTypes(t1,t2){
