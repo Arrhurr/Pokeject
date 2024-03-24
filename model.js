@@ -67,10 +67,10 @@ class Type{
 
 class Attack{
     static all_attacks = [];
-    constructor(att_name, type_move, critical_chance, duration, energy_delta, move_id,power, stamina_loss_scaler){
+    constructor(att_name, genre_move,type_move, critical_chance, duration, energy_delta, move_id,power, stamina_loss_scaler){
         this._att_name = att_name;       //nom de l'attaque
         this._type_move = type_move;  //type de l'attaque
-        this._genre_move; //attaque chargées ou rapide
+        this._genre_move = genre_move; //attaque chargées ou rapide
         this._critical_chance = critical_chance;
         this._duration = duration;
         this._energy_delta = energy_delta;
@@ -128,7 +128,7 @@ function import_pokemon(){
                             if(feur==0 || feur==1){
                                 if(charged_moves[a]["name"]==pokemon_moves[i][key][b]){
                                     if(Attack.exist(pokemon_moves[i][key][b])==1){
-                                        Attack.all_attacks.push(new Attack(pokemon_moves[i][key][b],Type.all_types[Type.find(charged_moves[a]["type"])],charged_moves[a]["critical_chance"],charged_moves[a]["duration"],charged_moves[a]["energy_delta"],charged_moves[a]["move_id"],charged_moves[a]["power"],charged_moves[a]["stamina_loss_scaler"]));
+                                        Attack.all_attacks.push(new Attack(pokemon_moves[i][key][b], key,Type.all_types[Type.find(charged_moves[a]["type"])],charged_moves[a]["critical_chance"],charged_moves[a]["duration"],charged_moves[a]["energy_delta"],charged_moves[a]["move_id"],charged_moves[a]["power"],charged_moves[a]["stamina_loss_scaler"]));
                                     }
                                 }   
                             }
@@ -137,7 +137,7 @@ function import_pokemon(){
                             if(feur==2 || feur==3){
                                 if(fast_moves[a]["name"]==pokemon_moves[i][key][b]){
                                     if(Attack.exist(pokemon_moves[i][key][b])==1){
-                                        Attack.all_attacks.push(new Attack(pokemon_moves[i][key][b],Type.all_types[Type.find(fast_moves[a]["type"])],fast_moves[a]["critical_chance"],fast_moves[a]["duration"],fast_moves[a]["energy_delta"],fast_moves[a]["move_id"],fast_moves[a]["power"],fast_moves[a]["stamina_loss_scaler"]));
+                                        Attack.all_attacks.push(new Attack(pokemon_moves[i][key][b],key,Type.all_types[Type.find(fast_moves[a]["type"])],fast_moves[a]["critical_chance"],fast_moves[a]["duration"],fast_moves[a]["energy_delta"],fast_moves[a]["move_id"],fast_moves[a]["power"],fast_moves[a]["stamina_loss_scaler"]));
                                     }
                                 }
                             }
