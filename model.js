@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////:
 class Pokemon{
     static all_pokemons = []
-    constructor(id,nom,form,attaque,defense,endurance,type){
+    constructor(id,nom,form,attaque,defense,endurance,type,move){
         this._id = id;
         this._nom = nom;
         this._form = form;
@@ -9,7 +9,7 @@ class Pokemon{
         this._defense =defense;
         this._endurance = endurance;
         this._type=type;
-////        this._attackability=attackability;
+        this._move = move;
     }    //ajouter this._attaque dans le tostring
     toString(){console.log(this._id);console.log(this._nom);console.log(this._form);console.log(this._attaque);console.log(this._defense);console.log(this._endurance);console.log(this._type);};
     get id(){return this._id;};
@@ -18,9 +18,10 @@ class Pokemon{
     get defense(){return this._defense;};
     get type(){return this._type;};
     get attaque(){return this._attaque;};
+    get move(){return this._move;};
     get endurance(){return this._endurance;};
-///    get attackability(){return this._attackability;};
     static pokemonByName(name){for(var i=0;i<Pokemon.all_pokemons.length;i++){if(Pokemon.all_pokemons[i].nom==name){return Pokemon.all_pokemons[i];}}}
+
     static pokemonById(id){for(var i=0;i<this.all_pokemons.length;i++){
         if(this.all_pokemons[i].id==id){return this.all_pokemons[i];}}
     }
@@ -69,7 +70,7 @@ class Attack{
     constructor(att_name, type_move, critical_chance, duration, energy_delta, move_id,power, stamina_loss_scaler){
         this._att_name = att_name;       //nom de l'attaque
         this._type_move = type_move;  //type de l'attaque
-        this._genre_move; //attaque chargÃ©es ou rapide
+        this._genre_move; //attaque chargées ou rapide
         this._critical_chance = critical_chance;
         this._duration = duration;
         this._energy_delta = energy_delta;
@@ -150,9 +151,9 @@ function import_pokemon(){
             for(let j=0;j<pokemon_type[i]["type"].length;j++){
                 poketype.push(Type.all_types[Type.find(pokemon_type[i]["type"][j])])
             }
-            Pokemon.all_pokemons.push(new Pokemon(pokemon[i]["pokemon_id"],pokemon[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"],poketype));
+            Pokemon.all_pokemons.push(new Pokemon(pokemon[i]["pokemon_id"],pokemon[i]["pokemon_name"],pokemon[i]["form"],pokemon[i]["base_attack"],pokemon[i]["base_defense"],pokemon[i]["base_stamina"],poketype,pokeattack));
         }
-         
+        
               
         
         
@@ -160,7 +161,6 @@ function import_pokemon(){
              
     }
 }
-
-
 ///////////////////////////////////////////////////////////////
 import_pokemon();
+
