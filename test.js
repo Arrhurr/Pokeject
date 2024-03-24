@@ -31,7 +31,7 @@ function getPokemonsByAttack(attackName){
 }
 
 
-function attackByType(typeName){
+function getAttacksByType(typeName){
     var garde = [];
     for(var i=0; i<Attack.all_attacks.length; i++){
         if(Attack.all_attacks[i].type_move.type == typeName){

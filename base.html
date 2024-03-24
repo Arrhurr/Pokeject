@@ -14,9 +14,9 @@
     <input type="text" id="getPokemonsByAttack" name="name" required minlength="4" maxlength="30" size="30" />
     <a onclick="console.table(getPokemonsByAttack(textbox2.value))">Cliquez ici</a><br>
 
-    <label for="name">attackByType (retourne toutes les attaques possédant le type entré):</label><br>
-    <input type="text" id="attackByType" name="name" required minlength="4" maxlength="30" size="30" />
-    <a onclick="console.table(attackByType(textbox3.value))">Cliquez ici</a><br>
+    <label for="name">getAttacksByType (retourne toutes les attaques possédant le type entré):</label><br>
+    <input type="text" id="getAttacksByType" name="name" required minlength="4" maxlength="30" size="30" />
+    <a onclick="console.table(getAttacksByType(textbox3.value))">Cliquez ici</a><br>
 
     <label for="name">sortPokemonByName (retourne tous les pokemons dans l'ordre alphabétique):</label><br>
     <a onclick="console.table(sortPokemonByName())">Cliquez ici</a><br>
@@ -47,7 +47,7 @@
 
     const textbox1 = document.getElementById('getPokemonsByType');
     const textbox2 = document.getElementById('getPokemonsByAttack');
-    const textbox3 = document.getElementById('attackByType');
+    const textbox3 = document.getElementById('getAttacksByType');
     const textbox4 = document.getElementById('getWeakestEnemies');
     const textbox5 = document.getElementById('getBestAttackTypesForEnnemy');
 
