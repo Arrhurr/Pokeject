@@ -1,3 +1,4 @@
+
 function getPokemonsByType(typeName){
     var types_found =[]
     if(Type.exist(typeName)==0){
@@ -10,7 +11,7 @@ function getPokemonsByType(typeName){
         }  
     }
     else{
-        console.log("Erreur le type entré est invalide")
+        console.table("Erreur le type entré est invalide")
     }
    
     return types_found
@@ -48,32 +49,64 @@ function sortPokemonByName(){
     return liste_noms.sort()
 }
 
+function DeuxTypes(t1,t2){
+    p1 = getPokemonsByType(t1);
+    p2 = getPokemonsByType(t2);
+    result=[]
+    for(var i=0;i<p1.length;i++){
+        for(var y=0;y<p2.length;y++){
+            if(p1[i]==p2[y]){
+                result.push(p1[i]);
+            }
+        }
+    }
+    return result;
+}
+
 function getWeakestEnemies(attack){
     var ennemis_faibles= []
     var max=0
     var obj_attack
-    var max_type = []
+    var max_type=[]
+    var result=[]
+    var result2=[]
     for(var z=0; z<Attack.all_attacks.length;z++){
         if(attack == Attack.all_attacks[z].att_name){
             obj_attack=Attack.all_attacks[z]
         }
     }
     for(key in obj_attack.type_move.effect){
-        if(max<=obj_attack.type_move.effect[key]){
+        if (max<obj_attack.type_move.effect[key]){
             max = obj_attack.type_move.effect[key];
-            max_type.push(max,key);
         }
-        key++;
+        
     }
-    for(i in obj_attack.type_move){
-        if(obj_attack.type_move[i]==1.6){
-            console.log(obj_attack.type_move[0])
+    for(key in obj_attack.type_move.effect){
+        if(obj_attack.type_move.effect[key]==max){
+            max_type.push(key)   
+        }    
+    }
+    for(var y=0;y<max_type.length;y++){
+        for(var i=y;i<max_type.length;i++){
+            if(max_type[y]!=max_type[i] && max_type.length>1){
+                result.push(DeuxTypes(max_type[y],max_type[i]));
+            }
+            if(max_type.length == 1){
+                result.push(getPokemonsByType(max_type[0]))
+            }
         }
     }
-
-    //ennemis_faibles.push(getPokemonsByType(max_type))
-    
-    return max_type;
+    for(var z=0;z<result.length;z++){
+        for(var q=0;q<result.length;q++){
+            if(result[z].length!=0 && result[z][q]!=null){
+                result2.push(result[z][q])
+            }
+        } 
+    }
+    if(max_type.length == 1){
+        result2 = result[0]
+    }
+    return result2;
 }
 
 function sortPokemonByStamina(){
@@ -128,4 +161,3 @@ function getAttackTypesForEnnemy(name){
     }
     return min;
 }
-
