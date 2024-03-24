@@ -10,7 +10,6 @@ class Pokemon{
         this._endurance = endurance;
         this._type=type;
         this._move = move;
-////        this._attackability=attackability;
     }    //ajouter this._attaque dans le tostring
     toString(){console.table(this._id);console.table(this._nom);console.table(this._form);console.table(this._attaque);console.table(this._defense);console.table(this._endurance);console.table(this._type);};
     get id(){return this._id;};
@@ -20,7 +19,9 @@ class Pokemon{
     get type(){return this._type;};
     get attaque(){return this._attaque;};
     get move(){return this._move;};
-///    get attackability(){return this._attackability;};
+    get endurance(){return this._endurance;};
+    static pokemonByName(name){for(var i=0;i<Pokemon.all_pokemons.length;i++){if(Pokemon.all_pokemons[i].nom==name){return Pokemon.all_pokemons[i];}}}
+
     static pokemonById(id){for(var i=0;i<this.all_pokemons.length;i++){
         if(this.all_pokemons[i].id==id){return this.all_pokemons[i];}}
     }
@@ -38,7 +39,7 @@ class Type{
     toString(){console.table(this._type);console.table(this._effect)};
     get type(){return this._type;};
     get effect(){return this._effect};
-    set effect(effect){this._effect.push([effect,type_effectiveness[this._type][effect]]);};
+    set effect(effect){this._effect=effect};
     
     
     static exist(type){
@@ -162,3 +163,4 @@ function import_pokemon(){
 }
 ///////////////////////////////////////////////////////////////
 import_pokemon();
+
