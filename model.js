@@ -119,7 +119,6 @@ function import_pokemon(){
     for(const [key,values] of Object.entries(generation)){
         liste_gen.push(values)
         }
-    console.log(liste_gen)
     for(key in type_effectiveness){
         Type.all_types.push(new Type(key,type_effectiveness[key]));
     }
