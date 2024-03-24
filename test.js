@@ -128,36 +128,34 @@ function sortPokemonByStamina(){
     return sorted;
 }
 
-function getAttackTypesForEnnemy(name){
+function getBestAttackTypesForEnnemy(name){
     var poke=Pokemon.pokemonByName(name);
-    var min=["Bug"];
-    console.log(poke.type[0].effect)
+    var max=["Bug"];
+    var vide=[]
     for(key in poke.type[0].effect){
         if(key!="Bug"){
-            console.log("AAAAA")
             if(poke.type.length==1){
-                console.log("oui")
-                if(poke.type[0].effect[key]>poke.type[0].effect[min[0]]){
-                    min=[]
-                    min.push(key)
+
+                if(type_effectiveness[key][poke.type[0].type]>type_effectiveness[max[0]][poke.type[0].type]){
+                    max=[]
+                    max.push(key)
                 }
-                else if(poke.type[0].effect[key]==poke.type[0].effect[min[0]]){
-                    min.push(key)
+                else if(type_effectiveness[key][poke.type[0].type]==type_effectiveness[max[0]][poke.type[0].type]){
+                    max.push(key)
                 }
-                console.table(poke.type[0].effect)
             }
             else{
-                console.log("non")
-                if(poke.type[0].effect[key] * poke.type[1].effect[key]>poke.type[0].effect[min[0]] * poke.type[1].effect[min[0]]){
-                    min=[]
-                    min.push(key)
+
+                if(type_effectiveness[key][poke.type[0].type] * type_effectiveness[key][poke.type[1].type]>type_effectiveness[max[0]][poke.type[0].type] * type_effectiveness[max[0]][poke.type[1].type]){
+                    max=[]
+                    max.push(key)
                 }
-                else if(poke.type[0].effect[key] * poke.type[1].effect[key]==poke.type[0].effect[min[0]] * poke.type[1].effect[min[0]]){
-                    min.push(key)
+                else if(type_effectiveness[key][poke.type[0].type] * type_effectiveness[key][poke.type[1].type]==type_effectiveness[max[0]][poke.type[0].type] * type_effectiveness[max[0]][poke.type[1].type]){
+                    max.push(key)
                 }
             }
         
         }
     }
-    return min;
+    return max;
 }

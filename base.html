@@ -24,6 +24,13 @@
     <label for="name">getWeakestEnemies (retourne toutes les pokemons les plus faibles par rapport à l'attaque entrée):</label><br>
     <input type="text" id="getWeakestEnemies" name="name" required minlength="4" maxlength="30" size="30" />
     <a onclick="console.table(getWeakestEnemies(textbox4.value))">Cliquez ici</a><br>
+    
+    <label for="name">sortPokemonByStamina (retourne tous les pokemons dans l'ordre de leur endurance):</label><br>
+    <a onclick="console.table(sortPokemonByStamina())">Cliquez ici</a><br>
+
+    <label for="name"> getAttackTypesForEnnemy (retourne les types d'attaques les plus efficaces contre un ennemi):</label><br>
+    <input type="text" id="getBestAttackTypesForEnnemy" name="name" required minlength="4" maxlength="30" size="30" />
+    <a onclick="console.table( getBestAttackTypesForEnnemy(textbox5.value))">Cliquez ici</a><br>
 
 </body>
 <script src="JSON/charged_moves.js"></script>
@@ -42,6 +49,7 @@
     const textbox2 = document.getElementById('getPokemonsByAttack');
     const textbox3 = document.getElementById('attackByType');
     const textbox4 = document.getElementById('getWeakestEnemies');
+    const textbox5 = document.getElementById('getBestAttackTypesForEnnemy');
 
 </script>
 </html>
