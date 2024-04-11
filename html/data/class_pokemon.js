@@ -14,7 +14,7 @@ class Pokemon{
     toString(){console.table(this._id);console.table(this._nom);console.table(this._form);console.table(this._attaque);console.table(this._defense);console.table(this._endurance);console.table(this._type);};
     get id(){return this._id;};
     get nom(){return this._nom;};
-    g
+    get generation(){return this._generation;};
     get form(){return this._form;};
     get defense(){return this._defense;};
     get type(){return this._type;};
