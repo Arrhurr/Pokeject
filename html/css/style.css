@@ -1,7 +1,6 @@
 
 
     table {
-    border-collapse: separate;
     font-family: sans-serif;
     font-size: 0.8rem;    
     letter-spacing: 1px;
@@ -12,11 +11,14 @@
     right: 0;
     height: 90%;
     width: 100%;
+    border-collapse: collapse;
+
     }
+
 
     caption {
     caption-side: bottom;
-    padding: 10px;
+    padding: 50px;
     }
 
     th   {
@@ -88,7 +90,4 @@
         color: #000000;
         background-color: #ffffff;
         border-radius: 5px;
-    }
-    caption{
-        padding:50px;
     }
