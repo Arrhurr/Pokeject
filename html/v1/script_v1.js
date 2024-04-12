@@ -1,4 +1,3 @@
-
     var body = document.getElementsByTagName("body")[0];
     var tbl = document.getElementsByTagName("table")[0];
     var tblHead = document.createElement("thead");
