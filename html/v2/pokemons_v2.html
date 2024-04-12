@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="../css/style.css"  />
-  <title>Document</title>
+  <title>Pokedex</title>
 </head>
 <body>
+  <div id="parent">
   <table id="table">
     <caption>
       Pokemons
@@ -24,7 +25,12 @@
   
       </tr>
     </thead>
-
+    <div id="enfant">
+  <p id="Page"><e></e></p>
+  <button type="button" onclick="precedant()" id="Precedant">Précédant</button>
+  <button type="button" onclick="suivant()" id="Suivant">Suivant</button>
+</div>
+</div>
 </body>
 <script src="../data/charged_moves.js"></script>
 <script src="../data/cp_multiplier.js"></script>
@@ -38,5 +44,5 @@
 <script src="../data/class_type.js"></script>
 <script src="../data/class_attack.js"></script>
 <script src="../data/import.js"></script>
-<script src="./script_v1.js"></script>
+<script src="script_v2.js"></script>
 </html>
