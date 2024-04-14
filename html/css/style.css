@@ -146,3 +146,6 @@
     tr:nth-child(even) {
       background-color: #ffffff; /* Couleur de fond gris légèrement plus foncé pour les lignes paires */
     }
+    label{
+      color: white;
+    }
