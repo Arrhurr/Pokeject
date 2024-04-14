@@ -30,6 +30,13 @@
     text-align: center;
     }
 
+    th, td{
+      border: none;
+    }
+
+    tr:nth-child(1) {
+      border-top: 1px solid #000000; /* Black border below header */
+    }
 
     body{
         background-image: url('fond_rouge.jpg');    
@@ -90,4 +97,52 @@
         color: #000000;
         background-color: #ffffff;
         border-radius: 5px;
+    }
+
+    .modal {
+      display: none;
+    }
+    .modal-back {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba( 0, 0, 0, .25 )
+    }
+    .modal-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      padding: 25px;
+      background: white;
+      transform: translate(-50%, -50%)
+    }
+
+    .modal2 {
+      display: none;
+    }
+    .modal-back2 {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba( 0, 0, 0, .25 )
+    }
+    .modal-container2 {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      padding: 25px;
+      background: white;
+      transform: translate(-50%, -50%)
+    }
+
+    tr:nth-child(odd) {
+      background-color: #ffcccc; /* Couleur de fond gris clair pour les lignes impaires */
+    }
+    
+    tr:nth-child(even) {
+      background-color: #ffffff; /* Couleur de fond gris légèrement plus foncé pour les lignes paires */
     }
