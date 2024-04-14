@@ -35,7 +35,7 @@
     }
 
     tr:nth-child(1) {
-      border-top: 1px solid #000000; /* Black border below header */
+      border-top: 1px solid #000000; 
     }
 
     body{
@@ -46,16 +46,16 @@
     
     #Suivant{
         position:absolute;
-        bottom: 10px; /* Adjust the bottom margin as needed */
-        right: 15%;
+        bottom: 10px; 
+        right: 150px;
         background-color: #4EAF5D;
         color: #ffffff;
     }
 
     #Precedant{
         position:absolute;
-        bottom: 10px; /* Adjust the bottom margin as needed */
-        left: 15%;
+        bottom: 10px; 
+        left: 150px;
         background-color: #29ABFC;
         color: #ffffff;
     }
@@ -66,7 +66,7 @@
   
     #bottom {
       position: absolute;
-      bottom: 0; /* set the bottom to 0*/
+      bottom: 0;
     }
     
     
@@ -94,7 +94,7 @@
 
     #Page{
         position: absolute;
-        bottom: 10px; /* Adjust the bottom margin as needed */
+        bottom: 10px; 
         left: 50%;
         color: #000000;
         background-color: #ffffff;
@@ -142,11 +142,11 @@
     }
 
     tr:nth-child(odd) {
-      background-color: #ffcccc; /* Couleur de fond gris clair pour les lignes impaires */
+      background-color: #ffcccc; 
     }
     
     tr:nth-child(even) {
-      background-color: #ffffff; /* Couleur de fond gris légèrement plus foncé pour les lignes paires */
+      background-color: #ffffff; 
     }
     label{
       color: white;
@@ -156,4 +156,13 @@
       position: fixed;
       top: 160px;
       right: 30px;
+    }
+
+    h1{
+      text-align: center;
+    }
+
+    #moves{
+      border-style: groove;
+      padding-right: 25px;
     }
