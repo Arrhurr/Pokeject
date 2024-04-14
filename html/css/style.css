@@ -39,20 +39,22 @@
     }
 
     body{
-        background-image: url('fond_rouge.jpg');    
+        background-image: url('fond_rouge.jpg');  
+        background-repeat: no-repeat;
+        background-color: #DC092C;  
     }
     
     #Suivant{
         position:absolute;
         bottom: 10px; /* Adjust the bottom margin as needed */
-        left: 80%;
+        right: 15%;
         background-color: #4EAF5D;
         color: #ffffff;
     }
 
     #Precedant{
         position:absolute;
-        bottom: 0; /* Adjust the bottom margin as needed */
+        bottom: 10px; /* Adjust the bottom margin as needed */
         left: 15%;
         background-color: #29ABFC;
         color: #ffffff;
@@ -128,7 +130,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba( 0, 0, 0, 0.8)
+      background: rgba( 0, 0, 0, 0.4)
     }
     .modal-container2 {
       position: fixed;
@@ -148,4 +150,10 @@
     }
     label{
       color: white;
+    }
+
+    #filtres{
+      position: fixed;
+      top: 160px;
+      right: 30px;
     }

@@ -16,10 +16,12 @@
     var click_end=0;
     var click_att=0;
     var click_def=0;
-var select1= document.getElementById("gen-select");
-var filtreGen="basic";
-var filtreType="basic";
-var filtreTexte="";
+    var select1= document.getElementById("gen-select");
+    var filtreGen="basic";
+    var filtreType="basic";
+    var filtreTexte="";
+
+document.getElementById('modal').style.display = 'none'
 select1.addEventListener("change",function(){
     filtreGen=this.value
     filtre(filtreGen,filtreType,filtreTexte)
@@ -77,6 +79,7 @@ var filtri =[];
 for(var i=0; i<Pokemon.all_pokemons.length; i++){
     filtri.push(Pokemon.all_pokemons[i]);
 }
+
 function tableau(tab){
 if(tab.length%25==0){
     var page_max=tab.length/25;
@@ -108,7 +111,6 @@ var cell5= document.createElement("th");
 var cell6= document.createElement("th");
 var cell7= document.createElement("th");
 var cell8= document.createElement("th");
-let déjavu = false;
 if(tab[i].id<10){
     var img = document.createElement('img');
         img.src =
@@ -169,7 +171,7 @@ tbl.appendChild(tblBody);
 
 
 
-document.getElementById('modal').style.display = 'none'
+
 
 document.getElementById('modal-close').addEventListener('click', function(e) {
 document.getElementById('modal').style.display = 'none'
@@ -192,10 +194,9 @@ function v3(){
         for (var y=0;y<pokemonById(filtri,this.getAttribute('id')).move.length;y++){
             if(pokemonById(filtri,this.getAttribute('id')).move[y].genre_move == "charged_moves"){
                 var ligne_pop_charged = document.createElement("li");
-                var pop = document.createTextNode(pokemonById(filtri,this.getAttribute('id')).move[y].att_name);
+                var pop = document.createTextNode(pokemonById(filtri,this.getAttribute('id')).move[y].att_name + "  " + pokemonById(filtri,this.getAttribute('id')).move[y].type_move.type);
                 ligne_pop_charged.appendChild(pop);
                 pop_up_charged.appendChild(ligne_pop_charged);
-                
             }
             else{
                 var ligne_pop_fast = document.createElement("li");
@@ -208,20 +209,18 @@ function v3(){
   }
     for(const p of pokemon_img) {
         p.addEventListener("mouseenter", function(){
-            setTimeout(() => {
-            }, "5000");
-            document.getElementById('modal2').style.display = 'block'    
+            document.getElementById('modal2').style.display = 'block'
             var image_grande = document.createElement("img");
             image_grande.src= '../webp/images/' + p.src.substr(-8,8);
-            console.log(image_grande);
             const imageContainer = document.querySelector('.modal-container2');
             imageContainer.appendChild(image_grande);
         })
-        p.addEventListener("mouseleave", function(){
+        p.addEventListener("mouseout", function(){
             document.getElementById('modal2').style.display = 'none' 
             const imageContainer = document.getElementById('modal2').querySelector('.modal-container2');
             imageContainer.innerHTML = "";   
         })
+        
     }
 
   // appends <table> into <body>
@@ -242,7 +241,6 @@ function sortByName(click){
             for(var u=0;u<filtri.length;u++){
                 if(liste_noms[y] == filtri[u].nom){
                     liste_noms2.push(filtri[u]);
-                    console.log(liste_noms[y])
                 }
             }
         }     
@@ -265,7 +263,7 @@ function sortByName(click){
     return liste_noms2
 }
 
-function sortPokemonByStamina(click){
+function sortPokemonByNumber(click){
     var sorted=filtri;
     if(click%2==0){
         for(var i=0; i<sorted.length; i++){
@@ -446,7 +444,6 @@ function sortByType(click){
     if(click%2==0){
         liste_noms = ['Bug','Dark','Dragon','Electric','Fairy','Fighting','Fire','Flying','Ghost','Grass','Ground','Ice','Normal','Poison','Psychic','Rock','Steel','Water'];
         liste_noms = liste_noms.sort();
-        console.log(liste_noms);
         for(var y=0;y<liste_noms.length;y++){
             for(var u=0;u<filtri.length;u++){
                 if(liste_noms[y] == filtri[u].type[0].type){
@@ -475,7 +472,6 @@ function tri_id(){
     const entete = document.getElementById('id');
     entete.addEventListener('click', function(){
             filtri = sortPokemonById(click_id);
-            console.log(filtri);
             tableau(filtri);
             click_id++;
             v3();
@@ -490,7 +486,6 @@ function tri_att(){
     const entete = document.getElementById('att');
     entete.addEventListener('click', function(){
             filtri = sortPokemonByAttaque(click_att);
-            console.log(filtri);
             tableau(filtri);
             click_att++;
             v3();
@@ -505,7 +500,6 @@ function tri_def(){
     const entete = document.getElementById('def');
     entete.addEventListener('click', function(){
             filtri = sortPokemonByDefense(click_def);
-            console.log(filtri);
             tableau(filtri);
             click_def++;
             v3();
@@ -519,7 +513,6 @@ function tri_gen(){
     const entete = document.getElementById('gen');
     entete.addEventListener('click', function(){
             filtri = sortPokemonById(click_gen);
-            console.log(filtri);
             tableau(filtri);
             click_gen++;
             v3();
@@ -531,7 +524,6 @@ function tri_type(){
     const entete = document.getElementById('1');
     entete.addEventListener('click', function(){
             filtri = sortByType(click_1);
-            console.log(filtri);
             tableau(filtri);
             click_1++;
             v3();
@@ -543,10 +535,9 @@ function tri_type(){
 };
 
 function tri_nom(){
-    const entete = document.getElementById('nom');
+    const entete = document.getElementById('nom2');
     entete.addEventListener('click', function(){
             filtri = sortByName(click_nom);
-            console.log(filtri);
             tableau(filtri);
             click_nom++;
             v3();
@@ -561,23 +552,12 @@ function tri_endu(){
     const entete = document.getElementById('end');
     entete.addEventListener('click', function(){
         filtri = sortPokemonByStamina(click_end);
-        console.log(filtri);
         tableau(filtri);
         click_end++;
         v3();    
         });
 
 };
-
-tableau(filtri);
-v3();
-tri_nom();
-tri_endu();
-tri_id();
-tri_gen();
-tri_att();
-tri_def();
-tri_type();
 
 
 
@@ -610,12 +590,22 @@ for(const objet of Pokemon.all_pokemons){
     if(garder){
         filtri.push(objet);
     }
-}
+    
+    
+}};
+
 max=25
 page=1
 tableau(filtri);
 v3();
-}
+tri_nom();
+tri_endu();
+tri_id();
+tri_gen();
+tri_att();
+tri_def();
+tri_type();
+
 function suivant(){
 
     page=page+1;
