@@ -20,6 +20,8 @@
     var filtreGen="basic";
     var filtreType="basic";
     var filtreTexte="";
+    var page=1;
+    var max=25;
 
 document.getElementById('modal').style.display = 'none'
 select1.addEventListener("change",function(){
@@ -111,6 +113,7 @@ var cell5= document.createElement("th");
 var cell6= document.createElement("th");
 var cell7= document.createElement("th");
 var cell8= document.createElement("th");
+console.log(tab[i])
 if(tab[i].id<10){
     var img = document.createElement('img');
         img.src =
@@ -562,42 +565,44 @@ function tri_endu(){
 
 
 function filtre(gen,type,text){
-filtri=[]
-for(const objet of Pokemon.all_pokemons){
-    var garder =true;
-    if(gen!="basic"){
-        if(gen!=objet.generation){
-            garder = false;
+    filtri=[]
+    for(const objet of Pokemon.all_pokemons){
+        var garder =true;
+        if(gen!="basic"){
+            if(gen!=objet.generation){
+                garder = false;
+            }
         }
-    }
-    if(type!="basic"){
-        if(objet.type.length>1){
-            if(type!=objet.type[0].type && type!=objet.type[1].type){
+        if(type!="basic"){
+            if(objet.type.length>1){
+                if(type!=objet.type[0].type && type!=objet.type[1].type){
+                    garder=false;
+                }
+            }
+            else{
+                if(type!=objet.type[0].type){
+                    garder=false;
+                }
+            }
+        }
+        if(text!=""){
+            if(!(objet.nom.includes(text))){
                 garder=false;
             }
         }
-        else{
-            if(type!=objet.type[0].type){
-                garder=false;
-            }
+        if(garder){
+            filtri.push(objet);
         }
     }
-    if(text!=""){
-        if(!(objet.nom.includes(text))){
-            garder=false;
-        }
-    }
-    if(garder){
-        filtri.push(objet);
-    }
-    
-    
-}};
+    max=25
+    page=1
+    tableau(filtri);
+    v3();
+}
 
-max=25
-page=1
 tableau(filtri);
 v3();
+
 tri_nom();
 tri_endu();
 tri_id();
