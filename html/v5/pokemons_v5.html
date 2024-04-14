@@ -4,9 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="../css/style.css"  />
+  <link rel="shortcut icon" type="image/png" href="../css/Pokedex_icon.png"  />
   <title>Pokedex</title>
 </head>
 <body>
+  <div id="filtres">
   <label for="Gen">Filtrer par génération:</label>
   <select name="gen" id="gen-select">
     <option value="basic">--Choisissez une option--</option>
@@ -17,16 +19,17 @@
   </select>
   <label for="Gen">Filtrer par nom:</label>
   <input type="text" id="nom" name="nom" />
+  </div>
   <div id="parent">
   <table id="table">
     <caption>
-      Pokemons
+      
     </caption>
     <thead>
       <tr>
         <th scope="col" class="entete" id="img">Image</th>
         <th scope="col" class="entete" id="id">Id</th>
-        <th scope="col" class="entete" id="nom">Nom</th>
+        <th scope="col" class="entete" id="nom2">Nom</th>
         <th scope="col" class="entete" id="gen">Génération</th>
         <th scope="col" class="entete" id="1">Types</th>
         <th scope="col" class="entete" id="end">Endurance</th>
