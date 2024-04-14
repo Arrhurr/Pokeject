@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="../css/style.css"  />
+  <title>Pokedex</title>
+</head>
+<body>
+  <div id="parent">
+  <table id="table">
+    <caption>
+      Pokemons
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Image</th>
+        <th scope="col">Id</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Génération</th>
+        <th scope="col" id="1">Types</th>
+        <th scope="col">Endurance</th>
+        <th scope="col">Points d'attaque de base</th>
+        <th scope="col">Points de défense de base</th>
+  
+      </tr>
+    </thead>
+    <div id="enfant">
+  <p id="Page"><e></e></p>
+  <button type="button" onclick="precedant()" id="Precedant">Précédant</button>
+  <button type="button" onclick="suivant()" id="Suivant">Suivant</button>
+</div>
+</div>
+<div class="modal" id="modal">
+  <div class="modal-back"></div>
+  <div class="modal-container">
+    <a href="#" id="modal-close"><img src="../css/cross.png" width=25px height=25px ></a>
+    <h1>Détails</h1>
+    <ul>
+      <li>Charged moves</li>
+      <ul id="charged"></ul>
+      <li>Fast moves</li>
+      <ul id="fast"></ul>
+    </ul>
+  </div>
+</div>
+<div class="modal2" id="modal2">
+  <div class="modal-back2"></div>
+  <div class="modal-container2">
+  </div>
+</div>
+</body>
+<script src="../data/charged_moves.js"></script>
+<script src="../data/cp_multiplier.js"></script>
+<script src="../data/fast_moves.js"></script>
+<script src="../data/generation.js"></script>
+<script src="../data/pokemon_moves.js"></script>
+<script src="../data/pokemon_type.js"></script>
+<script src="../data/pokemon.js"></script>
+<script src="../data/type_effectiveness.js"></script>
+<script src="../data/class_pokemon.js"></script>
+<script src="../data/class_type.js"></script>
+<script src="../data/class_attack.js"></script>
+<script src="../data/import.js"></script>
+<script src="script_v3.js"></script>
+</html>
